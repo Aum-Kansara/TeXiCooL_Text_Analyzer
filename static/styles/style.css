@@ -162,3 +162,14 @@ tr:nth-child(even) {
         width: 90%;
     }
 }
+@media only screen and (max-width:409px) {
+    .sample-txt{
+        height: fit-content;   
+    }
+}
+
+@media only screen and (max-width:278px) {
+    .clear-txt{
+        height: fit-content;   
+    }
+}
