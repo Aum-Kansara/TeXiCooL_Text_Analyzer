@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeXiCooL Text Analyzer</title>
+    <link rel="stylesheet" href="../static/styles/style.css">
+</head>
+<body>
+    <div class="container" style="overflow-y:auto;">
+        <div class="header">
+            <p>TeXiCooL Text Analyzer</p>
+        </div>
+        <form action="/" method="POST">
+            <div class="desc"><p>Enter or Paste Your Text to Analyze In The Box Below And Click On Go</p></div>
+            <div class="par-inp" name="par-inp">
+                
+                <textarea name="input_para" id="inputTxt" class="inputTxt" placeholder="Enter or paste the text here" required></textarea>
+            </div>
+            <div class="submit-btn">
+                <input type="submit" value="Go" class="btn" onclick="saveText()">
+            </div>
+        </form>
+        <hr>
+        <div class="footer">
+            <p style="color:green">Analyze Your Paragraph using TeXiCooL</p>
+        </div>
+        <div class="sample-btn">
+            <button class="btn sample-txt " onclick="setSampleText()">Add Sample Text</button>
+            <button class="btn clear-txt" onclick="clearText()">Clear Text</button>
+        </div>
+    </div>
+    <div class="container" style="overflow-y:auto;">
+        {% if output== None %}
+        <div class="output" style="width: 100%;height: 100%;padding: 5px;">
+            <p><h2>Output Will Be Displayed Here</h2></p>
+            <div class="no-out">
+               <p>No Output Yet</p>
+            </div>
+        {% else %}
+        <div class="output">
+        <p><h2 style="color:green">Output Will Be Displayed Here</h2></p>
+            <div class="label">
+                <p>Analysis</p>
+            </div>
+            <hr width="100%" style="margin:5px">
+            <div class="output-txt">
+                <ul>
+                    <p>Sentences : {{no_of_sentences}}</p>
+                    <p>Paragraph : {{no_of_para}}</p>
+                    <p>Words : {{no_of_words}}</p>
+                    <p>Characters (including space) : {{char_with_space}}</p>
+                    <p>Characters (excluding space) : {{char_without_space}}</p>
+                    <p>Words Per Sentence : {{words_per_sentence}}</p>
+                    <p>Characters Per Word : {{char_per_words}}</p>
+                </ul>
+            </div>
+                <hr width="100%" style="margin:5px">
+                <table>
+                    <tr class="table-head">
+                        <th>Word</th>
+                        <th>Part Of Speech</th>
+                        <th>Frequency</th>
+                    </tr>
+                {% for word,freq,pos in pos_tagged_words %}
+                    <tr>
+                        <td>{{word}}</td>
+                        <td>{{pos}}</td>
+                        <td>{{freq}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </div>
+    <script src="../static/scripts/script.js"></script>
+</body>
+</html>
